@@ -122,24 +122,12 @@ namespace Ayay.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool Setting {
+        public bool ForcedBreakEnabled {
             get {
-                return ((bool)(this["Setting"]));
+                return ((bool)(this["ForcedBreakEnabled"]));
             }
             set {
-                this["Setting"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool IsFirstTime {
-            get {
-                return ((bool)(this["IsFirstTime"]));
-            }
-            set {
-                this["IsFirstTime"] = value;
+                this["ForcedBreakEnabled"] = value;
             }
         }
     }

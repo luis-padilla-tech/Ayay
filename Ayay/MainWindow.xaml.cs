@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Windows;
-using System.Drawing;
 using System.Windows.Forms;
-using System.Windows.Media.Imaging;
-using Ayay.Properties;
-using System.Windows.Controls;
 
 namespace Ayay
 {
@@ -13,7 +9,11 @@ namespace Ayay
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Properties
         private NotifyIcon NotifyIcon { get; set; }
+        #endregion
+
+        #region Constructors
         public MainWindow()
         {
             InitializeComponent();
@@ -21,7 +21,7 @@ namespace Ayay
             //load icon
             NotifyIcon = new NotifyIcon()
             {
-                Icon = Ayay.Properties.Resources.favicon,
+                Icon = Properties.Resources.favicon,
                 Visible = false,
                 Text = "This is some test right here",
             };
@@ -35,6 +35,7 @@ namespace Ayay
             //Start App minimized
             MinimizeAyAy();
         }
+        #endregion
 
         #region Window State Change Methods
         /// <summary>
@@ -74,16 +75,6 @@ namespace Ayay
             ShowInTaskbar = true;
             NotifyIcon.Visible = !ShowInTaskbar;
         }
-        #endregion
-
-        #region Tray Icon Click Events
-        /// <summary>
-        /// Restore Window when the Tray Icon is double-clicked
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void TrayIconDoubleClick(object sender, EventArgs e) => WindowState = WindowState.Normal;
-        #endregion
 
         /// <summary>
         /// Save Settings Before Closing
@@ -94,5 +85,15 @@ namespace Ayay
         {
             Ayay.Properties.Settings.Default.Save();
         }
+        #endregion
+
+        #region Tray Icon Click Events
+        /// <summary>
+        /// Restore Window when the Tray Icon is double-clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void TrayIconDoubleClick(object sender, EventArgs e) => WindowState = WindowState.Normal;
+        #endregion
     }
 }

@@ -26,11 +26,8 @@
     <Setting Name="IsPaused" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="Setting" Type="System.Boolean" Scope="User">
+    <Setting Name="ForcedBreakEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="IsFirstTime" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>
