@@ -26,9 +26,9 @@ namespace Ayay.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("20")]
-        public long ShortBreakNotification {
+        public int ShortBreakNotification {
             get {
-                return ((long)(this["ShortBreakNotification"]));
+                return ((int)(this["ShortBreakNotification"]));
             }
             set {
                 this["ShortBreakNotification"] = value;
@@ -38,9 +38,9 @@ namespace Ayay.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("20")]
-        public long ShortBreakInterval {
+        public int ShortBreakInterval {
             get {
-                return ((long)(this["ShortBreakInterval"]));
+                return ((int)(this["ShortBreakInterval"]));
             }
             set {
                 this["ShortBreakInterval"] = value;
@@ -50,9 +50,9 @@ namespace Ayay.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("15")]
-        public long LongBreakNotification {
+        public int LongBreakNotification {
             get {
-                return ((long)(this["LongBreakNotification"]));
+                return ((int)(this["LongBreakNotification"]));
             }
             set {
                 this["LongBreakNotification"] = value;
@@ -62,9 +62,9 @@ namespace Ayay.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("50")]
-        public long LongBreakInterval {
+        public int LongBreakInterval {
             get {
-                return ((long)(this["LongBreakInterval"]));
+                return ((int)(this["LongBreakInterval"]));
             }
             set {
                 this["LongBreakInterval"] = value;
@@ -80,30 +80,6 @@ namespace Ayay.Properties {
             }
             set {
                 this["IsTakingLongBreaks"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public long StartTime {
-            get {
-                return ((long)(this["StartTime"]));
-            }
-            set {
-                this["StartTime"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public long EndTime {
-            get {
-                return ((long)(this["EndTime"]));
-            }
-            set {
-                this["EndTime"] = value;
             }
         }
         

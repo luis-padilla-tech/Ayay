@@ -2,26 +2,20 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Ayay.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ShortBreakNotification" Type="System.Int64" Scope="User">
+    <Setting Name="ShortBreakNotification" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">20</Value>
     </Setting>
-    <Setting Name="ShortBreakInterval" Type="System.Int64" Scope="User">
+    <Setting Name="ShortBreakInterval" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">20</Value>
     </Setting>
-    <Setting Name="LongBreakNotification" Type="System.Int64" Scope="User">
+    <Setting Name="LongBreakNotification" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">15</Value>
     </Setting>
-    <Setting Name="LongBreakInterval" Type="System.Int64" Scope="User">
+    <Setting Name="LongBreakInterval" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">50</Value>
     </Setting>
     <Setting Name="IsTakingLongBreaks" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="StartTime" Type="System.Int64" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="EndTime" Type="System.Int64" Scope="User">
-      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="IsPaused" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

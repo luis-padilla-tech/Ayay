@@ -114,12 +114,14 @@
             TickPlacement="BottomRight"
             Value="{Binding Source={x:Static properties:Settings.Default}, Mode=TwoWay, Path=LongBreakNotification}" />
         <Button
+            Name="btn_Timer"
             Grid.Row="6"
             Grid.ColumnSpan="100"
             Width="200"
             Height="30"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
+            Click="Btn_Timer_Click"
             Content="Start" />
     </Grid>
 </Window>
