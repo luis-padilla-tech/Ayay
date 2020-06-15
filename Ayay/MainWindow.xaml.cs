@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Media;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Forms;
 
 namespace Ayay
@@ -14,10 +13,8 @@ namespace Ayay
         #region Properties
         private bool IsPaused { get; set; }
         private NotifyIcon NotifyIcon { get; set; }
-        private Timer ShortBreakIntervalTimer { get; set; }
-        private Timer ShortBreakNotificationTimer { get; set; }
-        private Timer LongBreakIntervalTimer { get; set; }
-        private Timer LongBreakNotificationTimer { get; set; }
+        private Timer ShortBreakTimer { get; set; }
+        private Timer LongBreakTimer { get; set; }
         #endregion
 
         #region Constructors
@@ -26,12 +23,7 @@ namespace Ayay
             InitializeComponent();
 
             //load icon
-            NotifyIcon = new NotifyIcon()
-            {
-                Icon = Properties.Resources.favicon,
-                Visible = false,
-                Text = "This is some test right here",
-            };
+            CreateNotifyIcon();
 
             IsPaused = Properties.Settings.Default.IsPaused;
             ChangeButtonText();
@@ -40,10 +32,11 @@ namespace Ayay
             StateChanged += StateChangedEvent;
 
             //Tray Icon Handlers
-            NotifyIcon.DoubleClick += TrayIconDoubleClick;
 
             //Start App minimized
             MinimizeAyAy();
+
+            CreateShortBreakIntervalTimer();
         }
         #endregion
 
@@ -114,6 +107,35 @@ namespace Ayay
         }
         #endregion
 
+        #region Tray Icon Dispolay Methods
+
+        
+        private void CreateNotifyIcon()
+        {
+            NotifyIcon = new NotifyIcon()
+            {
+                Icon = Properties.Resources.favicon,
+                Visible = false,
+                BalloonTipTitle = "Break Notification",
+                Text = "This is some test right here",
+            };
+
+            NotifyIcon.DoubleClick += TrayIconDoubleClick;
+            NotifyIcon.BalloonTipClosed += NotifyIcon_BalloonTipClosed;
+        }
+        private void ShowNotification(string balloonText)
+        {
+            NotifyIcon.BalloonTipText = balloonText;
+            NotifyIcon.Visible = true;
+            NotifyIcon.ShowBalloonTip(1000);
+        }
+
+        private void NotifyIcon_BalloonTipClosed(object sender, EventArgs e)
+        {
+            NotifyIcon.Visible = WindowState == WindowState.Minimized;
+        }
+        #endregion
+
         private void ChangeButtonText()
         {
             btn_Timer.Content = IsPaused ? "Start" : "Pause";
@@ -123,13 +145,7 @@ namespace Ayay
         {
             IsPaused = !IsPaused;
             ChangeButtonText();
-            (IsPaused ? (Action<Timer>)StopTimer : StartTimer)(ShortBreakIntervalTimer);
-        }
-
-        private void ShortBreakNotificationTimerEvent(object sender, EventArgs e)
-        {
-            SystemSounds.Beep.Play();
-            StopTimer(ShortBreakNotificationTimer);
+            (IsPaused ? (Action<Timer>)StopTimer : StartTimer)(ShortBreakTimer);
         }
 
         /// <summary>
@@ -171,19 +187,36 @@ namespace Ayay
             return timer;
         }
 
-        private void CreateShortBreakIntervalTimer() => ShortBreakIntervalTimer = CreateTimer();
+        private void CreateShortBreakIntervalTimer() => ShortBreakTimer = CreateTimer(ConvertMinutesToMilliseconds(Properties.Settings.Default.ShortBreakInterval), ShortBreakNotificationEventStart);
+
+        private void CreateShortBreakNotification() => ShortBreakTimer = CreateTimer(ConvertSecondsToMilliseconds(Properties.Settings.Default.ShortBreakNotification), ShortBreakNotificationEventEnd);
 
 
-        private void CreateShortBreakNotification() => ShortBreakNotificationTimer = CreateTimer();
+        //private void CreateLongBreakInterval() => LongBreakTimer = CreateTimer();
 
-
-        private void CreateLongBreakInterval() => LongBreakIntervalTimer = CreateTimer();
-
-        private void CreateLongBreakNotification() => LongBreakNotificationTimer => CreateTimer();
+        //private void CreateLongBreakNotification() => LongBreakTimer = CreateTimer();
 
         #endregion
 
         #region Timer Events
+
+        private void ShortBreakNotificationEventStart(object sender, EventArgs e)
+        {
+            StopTimer(ShortBreakTimer);
+            CreateShortBreakNotification();
+            ShowNotification("Short Break has started");
+            StartTimer(ShortBreakTimer);
+        }
+
+
+        private void ShortBreakNotificationEventEnd(object sender, EventArgs e)
+        {
+            StopTimer(ShortBreakTimer);
+            ShowNotification("Short Break has ended");
+            CreateShortBreakIntervalTimer();
+            StartTimer(ShortBreakTimer);
+        }
+
         #endregion
 
         #region Time Converter Methods
@@ -192,14 +225,14 @@ namespace Ayay
         /// </summary>
         /// <param name="minutes">Miutes wanting to convert to milliseconds</param>
         /// <returns></returns>
-        private int ConvertMinutesToMilli(int minutes) => ConvertSecondsToMilli(minutes * 60);
+        private int ConvertMinutesToMilliseconds(int minutes) => ConvertSecondsToMilliseconds(minutes * 60);
 
         /// <summary>
         /// Convert a given amount of seconds to milliseconds
         /// </summary>
         /// <param name="seconds">Seconds wanting to convert to milliseconds</param>
         /// <returns></returns>
-        private int ConvertSecondsToMilli(int seconds) => seconds * 1000;
+        private int ConvertSecondsToMilliseconds(int seconds) => seconds * 1000;
         #endregion
 
     }
