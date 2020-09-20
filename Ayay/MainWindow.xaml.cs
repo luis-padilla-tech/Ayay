@@ -22,25 +22,27 @@ namespace Ayay
         {
             InitializeComponent();
 
-            //load icon
-            CreateNotifyIcon();
-
             IsPaused = Properties.Settings.Default.IsPaused;
-            ChangeButtonText();
 
-            //Window Event Handler
-            StateChanged += StateChangedEvent;
-
-            //Tray Icon Handlers
-
-            //Start App minimized
-            MinimizeAyAy();
-
-            CreateShortBreakIntervalTimer();
+            StartupAyay();
         }
         #endregion
 
         #region Startup Methods
+
+        private void StartupAyay()
+        {
+            //load icon
+            CreateNotifyIcon();
+            ChangeButtonText();
+            //Window Event Handler
+            StateChanged += StateChangedEvent;
+            //Start App minimized
+            MinimizeAyAy();
+
+            CreateShortBreakIntervalTimer();
+            Create
+        }
         #endregion
 
         #region Window State Change Methods
@@ -191,10 +193,9 @@ namespace Ayay
 
         private void CreateShortBreakNotification() => ShortBreakTimer = CreateTimer(ConvertSecondsToMilliseconds(Properties.Settings.Default.ShortBreakNotification), ShortBreakNotificationEventEnd);
 
+        private void CreateLongBreakInterval() => LongBreakTimer = CreateTimer(ConvertMinutesToMilliseconds(Properties.Settings.Default.LongBreakInterval), LongBreakNotificationEventStart);
 
-        //private void CreateLongBreakInterval() => LongBreakTimer = CreateTimer();
-
-        //private void CreateLongBreakNotification() => LongBreakTimer = CreateTimer();
+        private void CreateLongBreakNotification() => LongBreakTimer = CreateTimer(ConvertMinutesToMilliseconds(Properties.Settings.Default.LongBreakNotification, ));
 
         #endregion
 
@@ -215,6 +216,18 @@ namespace Ayay
             ShowNotification("Short Break has ended");
             CreateShortBreakIntervalTimer();
             StartTimer(ShortBreakTimer);
+        }
+
+
+        private void LongBreakNotificationEventStart(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void LongBreakNotificationEventEnd(object sender, EventArgs e)
+        {
+
         }
 
         #endregion
